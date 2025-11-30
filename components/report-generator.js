@@ -1,31 +1,19 @@
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { Download, Share2 } from 'lucide-react';
 
 export const ReportGenerator = ({ batch, logs }) => {
-  const generatePDF = async () => {
-    // هذا مثال مبسط. في تطبيق حقيقي، ستقوم بإنشاء مكون React مخفي
-    // يحتوي على كل بيانات التقرير بشكل منسق ثم تحويله.
-    const pdf = new jsPDF('p', 'mm', 'a4');
+  const generatePDF = () => {
+    const pdf = new jsPDF();
     pdf.text(`تقرير الدفعة رقم: ${batch.id}`, 20, 20);
     pdf.text(`السلالة: ${batch.breed}`, 20, 30);
     pdf.text(`تاريخ البدء: ${new Date(batch.startDate).toLocaleDateString('ar-EG')}`, 20, 40);
-    
-    // ... إضافة المزيد من البيانات من logs و batch
-    
     pdf.save(`report-batch-${batch.id}.pdf`);
   };
 
   const shareOnWhatsApp = () => {
     const totalFeed = logs.reduce((acc, log) => acc + log.feedConsumed, 0);
     const totalMortality = logs.reduce((acc, log) => acc + log.mortality, 0);
-    const text = `
-    🐔 تقرير سريع لدفعة #${batch.id}
-    - السلالة: ${batch.breed}
-    - العدد: ${batch.chickCount}
-    - إجمالي العلف المستهلك: ${totalFeed.toFixed(2)} كجم
-    - إجمالي النفوق: ${totalMortality}
-    `;
+    const text = `🐔 تقرير دفعة #${batch.id}\n- السلالة: ${batch.breed}\n- العدد: ${batch.chickCount}\n- إجمالي العلف: ${totalFeed.toFixed(2)} كجم\n- إجمالي النفوق: ${totalMortality}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -41,4 +29,4 @@ export const ReportGenerator = ({ batch, logs }) => {
       </button>
     </div>
   );
-};
+}; 
