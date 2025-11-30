@@ -37,4 +37,4 @@ export default function BatchesPage() {
       </div>
     </div>
   );
-        }
+    } 
