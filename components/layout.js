@@ -11,7 +11,6 @@ export const Layout = ({ children }) => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <div className="min-h-screen bg-gray-100 flex">
-        {/* الشريط الجانبي */}
         <aside className="w-64 bg-white shadow-md">
           <div className="p-4 text-2xl font-bold text-green-600 border-b">
             🐔 شمسين
@@ -34,8 +33,6 @@ export const Layout = ({ children }) => {
             </Link>
           </nav>
         </aside>
-
-        {/* المحتوى الرئيسي */}
         <main className="flex-1 p-8">
           {children}
         </main>
